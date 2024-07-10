@@ -1,11 +1,13 @@
 library(dplyr)
 library(tidyr)
 library(shiny)
+library(ggplot2)
 
 ui <- fluidPage(
   fileInput("data_file", "Upload your claims data here. (Only .csv file is accepted.)", accept = ".csv"),
   numericInput("tail_factor", "Tail factor:", value = 1.1, min = 1.0),
-  tableOutput("triangle")
+  tableOutput("triangle"),
+  plotOutput("graph", width = "800px")
 )
 
 server <- function(input, output, session) {
@@ -63,5 +65,17 @@ server <- function(input, output, session) {
     processed_data()
   })
   
+  output$graph <- renderPlot({
+    processed_data() %>%
+      pivot_longer(cols = -Loss.Year, names_to = "Development.Year", values_to = "Cumulative.Amount") %>%
+      mutate(Development.Year = as.numeric(Development.Year)) %>%
+      ggplot(aes(x = Development.Year, y = Cumulative.Amount, color = factor(Loss.Year))) +
+      geom_point() +
+      geom_text(aes(label = round(Cumulative.Amount, 0)), vjust = -1.0) +
+      geom_smooth() +
+      labs(x = "Development Year", y = "Cumulative Amount", color = "Loss Year") +
+      theme_bw()
+  })
 }
+
 shinyApp(ui, server)
