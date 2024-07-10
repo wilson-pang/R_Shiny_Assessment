@@ -4,6 +4,8 @@ library(shiny)
 library(ggplot2)
 
 ui <- fluidPage(
+  textOutput("instructions"),
+  imageOutput("image_instructions"),
   fileInput("data_file", "Upload your claims data here. (Only .csv file is accepted.)", accept = ".csv"),
   numericInput("tail_factor", "Tail factor:", value = 1.1, min = 1.0),
   tableOutput("triangle"),
@@ -60,6 +62,19 @@ server <- function(input, output, session) {
   
   triangle
   })
+  
+  output$instructions <- renderText({
+    "Important !!! : Your .csv file should look like this. 
+    The names of headers MUST be exactly the same as in the image provided. 
+    The cell position of the data MUST be exactly the same as in the image provided."
+  })
+  
+  output$image_instructions <- renderImage({
+    list(src = "C:/Users/mingw/Nicholas Actuarial Solutions Sdn Bhd/Intern - General/Wilson/GitHub for R/first.app.R/sample_csv.jpg", 
+         contentType = "image/jpeg", 
+         width = "400px",
+         deleteFile = FALSE)}, deleteFile = FALSE
+  )
   
   output$triangle <- renderTable({
     processed_data()
