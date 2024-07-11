@@ -2,7 +2,7 @@ https://wilson-pang.shinyapps.io/app1/
 
 **User guide:**
 
-Users have to upload .csv file containing incremental claims paid data for each loss year and its respective development years, following **STRICTLY **to the instructions given in the app.
+Users have to upload .csv file containing incremental claims paid data for each loss year and its respective development years, following **STRICTLY** to the instructions given in the app.
 
 The raw data in the Excel file need not to be sorted according to loss year and/or development year. The app will sort it automatically.
 
