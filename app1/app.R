@@ -10,6 +10,7 @@ ui <- fluidPage(
   fileInput("data_file", "Upload your claims data here. (Only .csv file is accepted.)", accept = ".csv"),
   numericInput("tail_factor", "Tail factor:", value = 1.1, min = 1.0),
   tableOutput("triangle"),
+  uiOutput("download_ui"),
   plotOutput("graph", width = "800px")
 )
 
@@ -80,6 +81,20 @@ server <- function(input, output, session) {
   output$triangle <- renderTable({
     processed_data()
   })
+  
+  output$download_ui <- renderUI({
+    req(input$data_file)
+    downloadButton("download_button", "Download as Excel here", icon = shiny::icon("download"))
+  })
+  
+  output$download_button <- downloadHandler(
+    filename = function() {
+      "basic chain ladder.csv"
+    },
+    content = function(file) {
+      write.csv(processed_data(), file)
+    }
+  )
   
   output$graph <- renderPlot({
     processed_data() %>%
