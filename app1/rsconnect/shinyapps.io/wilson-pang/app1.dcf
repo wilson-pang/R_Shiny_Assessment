@@ -1,0 +1,10 @@
+name: app1
+title:
+username: wilson-pang
+account: wilson-pang
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12304506
+bundleId: 8851263
+url: https://wilson-pang.shinyapps.io/app1/
+version: 1
