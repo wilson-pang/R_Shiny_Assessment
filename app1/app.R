@@ -5,13 +5,25 @@ library(ggplot2)
 library(rsconnect)
 
 ui <- fluidPage(
-  textOutput("instructions"),
-  imageOutput("image_instructions"),
-  fileInput("data_file", "Upload your claims data here. (Only .csv file is accepted.)", accept = ".csv"),
-  numericInput("tail_factor", "Tail factor:", value = 1.1, min = 1.0),
-  tableOutput("triangle"),
-  uiOutput("download_ui"),
-  plotOutput("graph", width = "800px")
+  
+  titlePanel("Basic Chain Ladder"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      textOutput("instructions"),
+      imageOutput("image_instructions"),
+      fileInput("data_file", "Upload your claims data here. (Only .csv file is accepted.)", accept = ".csv"),
+      numericInput("tail_factor", "Tail factor:", value = 1.1, min = 1.0),
+      width = 4
+    ),
+    
+    mainPanel(
+      tableOutput("triangle"),
+      uiOutput("download_ui"),
+      plotOutput("graph", width = "800px")
+    )
+  )
 )
 
 server <- function(input, output, session) {
