@@ -86,7 +86,7 @@ server <- function(input, output, session) {
   output$image_instructions <- renderImage({
     list(src = "sample_csv.jpg", 
          contentType = "image/jpeg", 
-         width = "400px",
+         width = "350px",
          deleteFile = FALSE)}, deleteFile = FALSE
   )
   
@@ -122,4 +122,5 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
-#deployApp(appName = "Wilson_R_Shiny_Assessment_App", appDir = "C:/Users/mingw/Nicholas Actuarial Solutions Sdn Bhd/Intern - General/Wilson/GitHub for R/R_Shiny_Assessment")
+# deployApp()
+# Successfully deployed to <https://wilson-pang.shinyapps.io/app1/>
